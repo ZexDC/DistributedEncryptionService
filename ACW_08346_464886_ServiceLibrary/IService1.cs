@@ -12,6 +12,9 @@ namespace ACW_08346_464886_ServiceLibrary
     public interface IService1
     {
         [OperationContract]
+        string HelloEcho(int id);
+
+        [OperationContract]
         string GetData(int value);
 
         [OperationContract]

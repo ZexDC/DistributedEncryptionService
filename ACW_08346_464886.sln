@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACW_08346_464886_Client", "ACW_08346_464886_Client\ACW_08346_464886_Client.csproj", "{7154E2AF-3205-4F44-B27D-28682E6E2188}"
+	ProjectSection(ProjectDependencies) = postProject
+		{24066B57-A8C8-4BD7-A6FC-2788F0135496} = {24066B57-A8C8-4BD7-A6FC-2788F0135496}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACW_08346_464886_ServiceLibrary", "ACW_08346_464886_ServiceLibrary\ACW_08346_464886_ServiceLibrary.csproj", "{24066B57-A8C8-4BD7-A6FC-2788F0135496}"
 EndProject
