@@ -84,6 +84,12 @@ namespace ACW_08346_464886_Client.ServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/HelloEcho", ReplyAction="http://tempuri.org/IService1/HelloEchoResponse")]
         System.Threading.Tasks.Task<string> HelloEchoAsync(int id);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Sort", ReplyAction="http://tempuri.org/IService1/SortResponse")]
+        string[] Sort(string[] array);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Sort", ReplyAction="http://tempuri.org/IService1/SortResponse")]
+        System.Threading.Tasks.Task<string[]> SortAsync(string[] array);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetData", ReplyAction="http://tempuri.org/IService1/GetDataResponse")]
         string GetData(int value);
         
@@ -130,6 +136,14 @@ namespace ACW_08346_464886_Client.ServiceReference1 {
         
         public System.Threading.Tasks.Task<string> HelloEchoAsync(int id) {
             return base.Channel.HelloEchoAsync(id);
+        }
+        
+        public string[] Sort(string[] array) {
+            return base.Channel.Sort(array);
+        }
+        
+        public System.Threading.Tasks.Task<string[]> SortAsync(string[] array) {
+            return base.Channel.SortAsync(array);
         }
         
         public string GetData(int value) {

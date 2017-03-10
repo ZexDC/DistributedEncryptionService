@@ -12,7 +12,20 @@ namespace ACW_08346_464886_ServiceLibrary
     {
         public string HelloEcho(int id)
         {
-            return string.Format("Hello");
+            Console.Write("Client No. {0} has contacted the server.\r\n", id);
+            return "Hello";
+        }
+
+        public string[] Sort(string[] array)
+        {
+            string[] sortedArray = array;
+            Array.Sort(sortedArray);
+            Console.Write("Sorted values:\r\n");
+            foreach(string s in sortedArray)
+            {
+                Console.WriteLine("{0} ", s);
+            }
+            return sortedArray;
         }
 
         public string GetData(int value)

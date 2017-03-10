@@ -15,6 +15,9 @@ namespace ACW_08346_464886_ServiceLibrary
         string HelloEcho(int id);
 
         [OperationContract]
+        string[] Sort(string[] array);
+
+        [OperationContract]
         string GetData(int value);
 
         [OperationContract]
