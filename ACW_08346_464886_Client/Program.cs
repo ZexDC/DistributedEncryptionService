@@ -21,7 +21,11 @@ namespace ACW_08346_464886_Client
             {
                 // get the instruction of line s
                 int firstSpaceIndex = s.IndexOf(" ");
-                string instruction = s.Substring(0, firstSpaceIndex);
+                string instruction;
+                if(firstSpaceIndex==-1) // no spaces found
+                    instruction = s;
+                else
+                    instruction = s.Substring(0, firstSpaceIndex);
                 // execute action based on instruction
                 ServiceReference1.Service1Client Service = new ServiceReference1.Service1Client();
                 switch (instruction.ToUpper())
@@ -45,6 +49,9 @@ namespace ACW_08346_464886_Client
                         }
                         break;
                     case "PUBKEY":
+                        string[] hexPublicKey = Service.PublicKey();
+                        Console.WriteLine(hexPublicKey[0]);
+                        Console.WriteLine(hexPublicKey[1]);
                         break;
                     case "ENC":
                         break;
@@ -59,19 +66,6 @@ namespace ACW_08346_464886_Client
                 }
             }
             Console.ReadLine();
-        }
-
-        static string ByteArrayToHexString(byte[] byteArray)
-        {
-            string hexString = "";
-            if (byteArray != null)
-            {
-                foreach (byte b in byteArray)
-                {
-                    hexString += b.ToString("x2");
-                }
-            }
-            return hexString;
         }
     }
 }

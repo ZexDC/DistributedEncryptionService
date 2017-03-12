@@ -17,7 +17,8 @@ namespace ACW_08346_464886_Server
             RSAParameters privateKey;
 
             // start the server using the service library
-            ServiceHost myHost = new ServiceHost(typeof(Service1));
+            Service1 serviceInstance = new Service1();
+            ServiceHost myHost = new ServiceHost(serviceInstance);
             myHost.Open();
             Console.WriteLine("Server running...");
 
@@ -34,6 +35,7 @@ namespace ACW_08346_464886_Server
                 Exponent = StringToByteArray(inputLines[3]),
                 Modulus = StringToByteArray(inputLines[5])
             };
+            serviceInstance.PubKey = publicKey;
             privateKey = new RSAParameters()
             {
                 D = StringToByteArray(inputLines[0]),
@@ -45,6 +47,7 @@ namespace ACW_08346_464886_Server
                 P = StringToByteArray(inputLines[6]),
                 Q = StringToByteArray(inputLines[7])
             };
+            serviceInstance.PrivKey = privateKey;
 
             Console.ReadLine(); // should close in 10 seconds instead of waiting for input
             myHost.Close();
