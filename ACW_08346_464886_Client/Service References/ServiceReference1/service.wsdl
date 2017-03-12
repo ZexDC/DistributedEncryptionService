@@ -20,6 +20,12 @@
   <wsdl:message name="IService1_Sort_OutputMessage">
     <wsdl:part name="parameters" element="tns:SortResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_PublicKey_InputMessage">
+    <wsdl:part name="parameters" element="tns:PublicKey" />
+  </wsdl:message>
+  <wsdl:message name="IService1_PublicKey_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PublicKeyResponse" />
+  </wsdl:message>
   <wsdl:message name="IService1_GetData_InputMessage">
     <wsdl:part name="parameters" element="tns:GetData" />
   </wsdl:message>
@@ -40,6 +46,10 @@
     <wsdl:operation name="Sort">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/Sort" message="tns:IService1_Sort_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/SortResponse" message="tns:IService1_Sort_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PublicKey">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/PublicKey" message="tns:IService1_PublicKey_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/PublicKeyResponse" message="tns:IService1_PublicKey_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetData">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetData" message="tns:IService1_GetData_InputMessage" />
@@ -63,6 +73,15 @@
     </wsdl:operation>
     <wsdl:operation name="Sort">
       <soap:operation soapAction="http://tempuri.org/IService1/Sort" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PublicKey">
+      <soap:operation soapAction="http://tempuri.org/IService1/PublicKey" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

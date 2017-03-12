@@ -90,6 +90,12 @@ namespace ACW_08346_464886_Client.ServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Sort", ReplyAction="http://tempuri.org/IService1/SortResponse")]
         System.Threading.Tasks.Task<string[]> SortAsync(string[] array);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/PublicKey", ReplyAction="http://tempuri.org/IService1/PublicKeyResponse")]
+        string[] PublicKey();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/PublicKey", ReplyAction="http://tempuri.org/IService1/PublicKeyResponse")]
+        System.Threading.Tasks.Task<string[]> PublicKeyAsync();
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetData", ReplyAction="http://tempuri.org/IService1/GetDataResponse")]
         string GetData(int value);
         
@@ -144,6 +150,14 @@ namespace ACW_08346_464886_Client.ServiceReference1 {
         
         public System.Threading.Tasks.Task<string[]> SortAsync(string[] array) {
             return base.Channel.SortAsync(array);
+        }
+        
+        public string[] PublicKey() {
+            return base.Channel.PublicKey();
+        }
+        
+        public System.Threading.Tasks.Task<string[]> PublicKeyAsync() {
+            return base.Channel.PublicKeyAsync();
         }
         
         public string GetData(int value) {

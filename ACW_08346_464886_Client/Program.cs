@@ -60,5 +60,18 @@ namespace ACW_08346_464886_Client
             }
             Console.ReadLine();
         }
+
+        static string ByteArrayToHexString(byte[] byteArray)
+        {
+            string hexString = "";
+            if (byteArray != null)
+            {
+                foreach (byte b in byteArray)
+                {
+                    hexString += b.ToString("x2");
+                }
+            }
+            return hexString;
+        }
     }
 }

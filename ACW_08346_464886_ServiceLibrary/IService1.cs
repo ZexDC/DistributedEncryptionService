@@ -18,6 +18,9 @@ namespace ACW_08346_464886_ServiceLibrary
         string[] Sort(string[] array);
 
         [OperationContract]
+        string[] PublicKey();
+
+        [OperationContract]
         string GetData(int value);
 
         [OperationContract]

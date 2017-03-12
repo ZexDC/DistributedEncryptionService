@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
+using System.Security.Cryptography;
 using System.ServiceModel;
 using System.Text;
 
@@ -26,6 +27,14 @@ namespace ACW_08346_464886_ServiceLibrary
                 Console.WriteLine("{0} ", s);
             }
             return sortedArray;
+        }
+
+        public string[] PublicKey()
+        {
+            string[] publicKey = new string[2];
+
+            Console.Write("Sending the public key to the client.\r\n");
+            return publicKey;
         }
 
         public string GetData(int value)
