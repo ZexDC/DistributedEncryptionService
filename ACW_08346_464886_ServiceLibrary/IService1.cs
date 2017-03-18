@@ -21,6 +21,9 @@ namespace ACW_08346_464886_ServiceLibrary
         string[] PublicKey();
 
         [OperationContract]
+        void Decrypt(byte[] encryptedByteMessage);
+
+        [OperationContract]
         string GetData(int value);
 
         [OperationContract]

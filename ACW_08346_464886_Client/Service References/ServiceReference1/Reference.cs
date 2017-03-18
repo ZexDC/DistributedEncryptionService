@@ -96,6 +96,12 @@ namespace ACW_08346_464886_Client.ServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/PublicKey", ReplyAction="http://tempuri.org/IService1/PublicKeyResponse")]
         System.Threading.Tasks.Task<string[]> PublicKeyAsync();
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Decrypt", ReplyAction="http://tempuri.org/IService1/DecryptResponse")]
+        void Decrypt(byte[] encryptedByteMessage);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Decrypt", ReplyAction="http://tempuri.org/IService1/DecryptResponse")]
+        System.Threading.Tasks.Task DecryptAsync(byte[] encryptedByteMessage);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetData", ReplyAction="http://tempuri.org/IService1/GetDataResponse")]
         string GetData(int value);
         
@@ -158,6 +164,14 @@ namespace ACW_08346_464886_Client.ServiceReference1 {
         
         public System.Threading.Tasks.Task<string[]> PublicKeyAsync() {
             return base.Channel.PublicKeyAsync();
+        }
+        
+        public void Decrypt(byte[] encryptedByteMessage) {
+            base.Channel.Decrypt(encryptedByteMessage);
+        }
+        
+        public System.Threading.Tasks.Task DecryptAsync(byte[] encryptedByteMessage) {
+            return base.Channel.DecryptAsync(encryptedByteMessage);
         }
         
         public string GetData(int value) {

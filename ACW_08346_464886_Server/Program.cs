@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.ServiceModel;
 using ACW_08346_464886_ServiceLibrary;
 using System.Security.Cryptography;
+using System.Threading;
 
 namespace ACW_08346_464886_Server
 {
@@ -48,9 +49,26 @@ namespace ACW_08346_464886_Server
                 Q = StringToByteArray(inputLines[7])
             };
             serviceInstance.PrivKey = privateKey;
+#if DEBUG
+            // press enter to close server
+            Console.ReadLine();
+#else
+            // http://stackoverflow.com/a/24601591
+            // alternative wait solution
+            //Task.Run(async () =>
+            //{
+            //    Thread.Sleep(9000);
+            //}).GetAwaiter().GetResult();
 
-            Console.ReadLine(); // should close in 10 seconds instead of waiting for input
+            // Wait on separate thread for less than 10 sec without blocking server
+            Delay(9000).Wait();
+#endif
             myHost.Close();
+        }
+
+        static async Task Delay(int milliseconds)
+        {
+            Thread.Sleep(milliseconds);
         }
 
         public static byte[] StringToByteArray(string hex)

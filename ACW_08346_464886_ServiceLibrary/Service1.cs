@@ -35,10 +35,16 @@ namespace ACW_08346_464886_ServiceLibrary
             string[] sortedArray = array;
             Array.Sort(sortedArray);
             Console.Write("Sorted values:\r\n");
-            foreach(string s in sortedArray)
+            for (int i = 0; i < sortedArray.Length; i++)
             {
-                Console.WriteLine("{0} ", s);
+                Console.Write("{0}", sortedArray[i]);
+                if ((i + 1) % 2 == 0 && (i + 1) < sortedArray.Length)
+                    Console.Write(" "); // separate each pair of values
             }
+            //foreach (string s in sortedArray)
+            //{
+            //    Console.WriteLine("{0} ", s);
+            //}
             return sortedArray;
         }
 
@@ -49,6 +55,18 @@ namespace ACW_08346_464886_ServiceLibrary
             hexPublicKey[0] = ByteArrayToHexString(pubKey.Exponent);
             hexPublicKey[1] = ByteArrayToHexString(pubKey.Modulus);
             return hexPublicKey;
+        }
+
+        public void Decrypt(byte[] encryptedByteMessage)
+        {
+            byte[] decryptedByteMessage;
+            using (RSACryptoServiceProvider RSA = new RSACryptoServiceProvider())
+            {
+                decryptedByteMessage = RSADecrypt(encryptedByteMessage, privKey);
+                Console.Write("Decrypted message is: {0}.\r\n",
+                    System.Text.Encoding.ASCII.GetString(decryptedByteMessage));
+            }
+            return;
         }
 
         static string ByteArrayToHexString(byte[] byteArray)
@@ -62,6 +80,25 @@ namespace ACW_08346_464886_ServiceLibrary
                 }
             }
             return hexString;
+        }
+
+        static public byte[] RSADecrypt(byte[] DataToDecrypt, RSAParameters RSAKeyInfo)
+        {
+            try
+            {
+                byte[] decryptedData;
+                using (RSACryptoServiceProvider RSA = new RSACryptoServiceProvider())
+                {
+                    RSA.ImportParameters(RSAKeyInfo);
+                    decryptedData = RSA.Decrypt(DataToDecrypt, false);
+                }
+                return decryptedData;
+            }
+            catch (CryptographicException e)
+            {
+                Console.Write(e.Message);
+                return null;
+            }
         }
 
         public string GetData(int value)
