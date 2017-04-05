@@ -48,7 +48,7 @@ namespace ACW_08346_464886_Client
                         string[] arrayToSort = splitList.ToArray(); // array containing only values to sort
                         string[] sortedArray = Service.Sort(arrayToSort);
                         Console.Write("Sorted values:\r\n");
-                        
+                        /*
                         for (int i = 0; i < sortedArray.Length; i++)
                         {
                             Console.Write("{0}", sortedArray[i]);
@@ -56,12 +56,12 @@ namespace ACW_08346_464886_Client
                             {
                                 Console.Write(" "); // separate each pair of values
                             }
-                        }
-                        /*
+                        }*/
+                        
                         foreach (string str in sortedArray)
                         {
                             Console.Write("{0} ", str);
-                        }*/
+                        }
                         Console.Write("\r\n");
                         break;
                     case "PUBKEY":
@@ -176,7 +176,7 @@ namespace ACW_08346_464886_Client
                 RSACryptoServiceProvider RSAalg = new RSACryptoServiceProvider();
                 RSAalg.ImportParameters(Key);
                 // Verify the data using the signature.
-                return RSAalg.VerifyData(DataToVerify, new SHA256CryptoServiceProvider(), SignedData);
+                return RSAalg.VerifyData(DataToVerify, new SHA1CryptoServiceProvider(), SignedData);
             }
             catch (CryptographicException e)
             {
