@@ -32,6 +32,18 @@
   <wsdl:message name="IService1_Decrypt_OutputMessage">
     <wsdl:part name="parameters" element="tns:DecryptResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_ComputeSHA1_InputMessage">
+    <wsdl:part name="parameters" element="tns:ComputeSHA1" />
+  </wsdl:message>
+  <wsdl:message name="IService1_ComputeSHA1_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ComputeSHA1Response" />
+  </wsdl:message>
+  <wsdl:message name="IService1_ComputeSHA256_InputMessage">
+    <wsdl:part name="parameters" element="tns:ComputeSHA256" />
+  </wsdl:message>
+  <wsdl:message name="IService1_ComputeSHA256_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ComputeSHA256Response" />
+  </wsdl:message>
   <wsdl:message name="IService1_GetData_InputMessage">
     <wsdl:part name="parameters" element="tns:GetData" />
   </wsdl:message>
@@ -60,6 +72,14 @@
     <wsdl:operation name="Decrypt">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/Decrypt" message="tns:IService1_Decrypt_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/DecryptResponse" message="tns:IService1_Decrypt_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ComputeSHA1">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/ComputeSHA1" message="tns:IService1_ComputeSHA1_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/ComputeSHA1Response" message="tns:IService1_ComputeSHA1_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ComputeSHA256">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/ComputeSHA256" message="tns:IService1_ComputeSHA256_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/ComputeSHA256Response" message="tns:IService1_ComputeSHA256_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetData">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetData" message="tns:IService1_GetData_InputMessage" />
@@ -101,6 +121,24 @@
     </wsdl:operation>
     <wsdl:operation name="Decrypt">
       <soap:operation soapAction="http://tempuri.org/IService1/Decrypt" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ComputeSHA1">
+      <soap:operation soapAction="http://tempuri.org/IService1/ComputeSHA1" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ComputeSHA256">
+      <soap:operation soapAction="http://tempuri.org/IService1/ComputeSHA256" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

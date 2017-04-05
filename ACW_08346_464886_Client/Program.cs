@@ -90,8 +90,18 @@ namespace ACW_08346_464886_Client
                         }
                         break;
                     case "SHA1":
+                        // get message from input line s
+                        string messageSHA1 = s.Substring(firstSpaceIndex + 1);
+                        // get the hexadecimal format of the computed SHA1
+                        string hexSHA1 = Service.ComputeSHA1(messageSHA1);
+                        Console.WriteLine(hexSHA1);
                         break;
                     case "SHA256":
+                        // get message from input line s
+                        string messageSHA256 = s.Substring(firstSpaceIndex + 1);
+                        // get the hexadecimal format of the computed SHA256
+                        string hexSHA256 = Service.ComputeSHA256(messageSHA256);
+                        Console.WriteLine(hexSHA256);
                         break;
                     case "SIGN":
                         break;

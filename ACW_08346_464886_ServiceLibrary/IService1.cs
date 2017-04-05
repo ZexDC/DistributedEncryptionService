@@ -24,6 +24,12 @@ namespace ACW_08346_464886_ServiceLibrary
         void Decrypt(byte[] encryptedByteMessage);
 
         [OperationContract]
+        string ComputeSHA1(string message);
+
+        [OperationContract]
+        string ComputeSHA256(string message);
+
+        [OperationContract]
         string GetData(int value);
 
         [OperationContract]

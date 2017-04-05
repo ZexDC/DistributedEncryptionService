@@ -69,6 +69,32 @@ namespace ACW_08346_464886_ServiceLibrary
             return;
         }
 
+        public string ComputeSHA1(string message)
+        {
+            string hexSHA1 = "";
+            byte[] asciiByteMessage = System.Text.Encoding.ASCII.GetBytes(message);
+            byte[] sha1ByteMessage;
+            SHA1 sha1Provider = new SHA1CryptoServiceProvider();
+            sha1ByteMessage = sha1Provider.ComputeHash(asciiByteMessage);
+            hexSHA1 = ByteArrayToHexString(sha1ByteMessage);
+            Console.Write("SHA-1 hash of {0} is {1}.\r\n", message, hexSHA1);
+            return hexSHA1;
+        }
+
+        public string ComputeSHA256(string message)
+        {
+            string hexSHA256 = "";
+            byte[] asciiByteMessage = System.Text.Encoding.ASCII.GetBytes(message);
+            byte[] sha1ByteMessage;
+            SHA256 sha256Provider = new SHA256CryptoServiceProvider();
+            sha1ByteMessage = sha256Provider.ComputeHash(asciiByteMessage);
+            hexSHA256 = ByteArrayToHexString(sha1ByteMessage);
+            Console.Write("SHA-1 hash of {0} is {1}.\r\n", message, hexSHA256);
+            return hexSHA256;
+        }
+
+
+
         static string ByteArrayToHexString(byte[] byteArray)
         {
             string hexString = "";

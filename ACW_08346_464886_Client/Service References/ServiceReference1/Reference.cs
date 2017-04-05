@@ -102,6 +102,18 @@ namespace ACW_08346_464886_Client.ServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Decrypt", ReplyAction="http://tempuri.org/IService1/DecryptResponse")]
         System.Threading.Tasks.Task DecryptAsync(byte[] encryptedByteMessage);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/ComputeSHA1", ReplyAction="http://tempuri.org/IService1/ComputeSHA1Response")]
+        string ComputeSHA1(string message);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/ComputeSHA1", ReplyAction="http://tempuri.org/IService1/ComputeSHA1Response")]
+        System.Threading.Tasks.Task<string> ComputeSHA1Async(string message);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/ComputeSHA256", ReplyAction="http://tempuri.org/IService1/ComputeSHA256Response")]
+        string ComputeSHA256(string message);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/ComputeSHA256", ReplyAction="http://tempuri.org/IService1/ComputeSHA256Response")]
+        System.Threading.Tasks.Task<string> ComputeSHA256Async(string message);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetData", ReplyAction="http://tempuri.org/IService1/GetDataResponse")]
         string GetData(int value);
         
@@ -172,6 +184,22 @@ namespace ACW_08346_464886_Client.ServiceReference1 {
         
         public System.Threading.Tasks.Task DecryptAsync(byte[] encryptedByteMessage) {
             return base.Channel.DecryptAsync(encryptedByteMessage);
+        }
+        
+        public string ComputeSHA1(string message) {
+            return base.Channel.ComputeSHA1(message);
+        }
+        
+        public System.Threading.Tasks.Task<string> ComputeSHA1Async(string message) {
+            return base.Channel.ComputeSHA1Async(message);
+        }
+        
+        public string ComputeSHA256(string message) {
+            return base.Channel.ComputeSHA256(message);
+        }
+        
+        public System.Threading.Tasks.Task<string> ComputeSHA256Async(string message) {
+            return base.Channel.ComputeSHA256Async(message);
         }
         
         public string GetData(int value) {
