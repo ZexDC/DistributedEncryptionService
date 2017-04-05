@@ -89,10 +89,26 @@ namespace ACW_08346_464886_ServiceLibrary
             SHA256 sha256Provider = new SHA256CryptoServiceProvider();
             sha1ByteMessage = sha256Provider.ComputeHash(asciiByteMessage);
             hexSHA256 = ByteArrayToHexString(sha1ByteMessage);
-            Console.Write("SHA-1 hash of {0} is {1}.\r\n", message, hexSHA256);
+            Console.Write("SHA-256 hash of {0} is {1}.\r\n", message, hexSHA256);
             return hexSHA256;
         }
 
+        public byte[] Sign(byte[] asciiByteMessage)
+        {
+            byte[] signedAsciiByteMessage = null;
+            string message = System.Text.Encoding.ASCII.GetString(asciiByteMessage);
+            if (message.ToUpper() == "CHEESECAKE")
+            {
+                Console.Write("No cheesecake allowed.\r\n");
+            }
+            else
+            {
+                Console.Write("Signing data: {0}.\r\n", message);
+                signedAsciiByteMessage = HashAndSignBytes(asciiByteMessage, privKey);
+
+            }
+            return signedAsciiByteMessage;
+        }
 
 
         static string ByteArrayToHexString(byte[] byteArray)
@@ -127,22 +143,20 @@ namespace ACW_08346_464886_ServiceLibrary
             }
         }
 
-        public string GetData(int value)
+        public static byte[] HashAndSignBytes(byte[] DataToSign, RSAParameters Key)
         {
-            return string.Format("You entered: {0}", value);
+            try
+            {
+                RSACryptoServiceProvider RSAalg = new RSACryptoServiceProvider();
+                RSAalg.ImportParameters(Key);
+                return RSAalg.SignData(DataToSign, new SHA256CryptoServiceProvider());
+            }
+            catch (CryptographicException e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
         }
 
-        public CompositeType GetDataUsingDataContract(CompositeType composite)
-        {
-            if (composite == null)
-            {
-                throw new ArgumentNullException("composite");
-            }
-            if (composite.BoolValue)
-            {
-                composite.StringValue += "Suffix";
-            }
-            return composite;
-        }
     }
 }

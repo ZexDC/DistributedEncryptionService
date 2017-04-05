@@ -104,6 +104,33 @@ namespace ACW_08346_464886_Client
                         Console.WriteLine(hexSHA256);
                         break;
                     case "SIGN":
+                        if (hexPublicKey == null)
+                        {
+                            Console.Write("No public key.\r\n");
+                        }
+                        else
+                        {
+                            // get message from input line s
+                            string message = s.Substring(firstSpaceIndex + 1);
+                            // convert msg to byte array
+                            byte[] asciiByteMessage = System.Text.Encoding.ASCII.GetBytes(message);
+                            // recreate the public key as RSAParameters object
+                            RSAParameters publicKey = new RSAParameters()
+                            {
+                                Exponent = StringToByteArray(hexPublicKey[0]),
+                                Modulus = StringToByteArray(hexPublicKey[1])
+                            };
+                            // get the signed hex from the server anc check if it is correct
+                            byte[] signedAsciiByteMessage = Service.Sign(asciiByteMessage);
+                            if (VerifySignedHash(asciiByteMessage, signedAsciiByteMessage, publicKey))
+                            {
+                                Console.Write("Signature successfully verified.\r\n");
+                            }
+                            else
+                            {
+                                Console.Write("Data not signed.\r\n");
+                            }
+                        }
                         break;
                     default:
                         break;
@@ -130,6 +157,24 @@ namespace ACW_08346_464886_Client
             {
                 Console.Write(e.Message);
                 return null;
+            }
+        }
+
+        public static bool VerifySignedHash(byte[] DataToVerify, byte[] SignedData, RSAParameters Key)
+        {
+            if (SignedData == null) return false;
+
+            try
+            {
+                RSACryptoServiceProvider RSAalg = new RSACryptoServiceProvider();
+                RSAalg.ImportParameters(Key);
+                // Verify the data using the signature.
+                return RSAalg.VerifyData(DataToVerify, new SHA256CryptoServiceProvider(), SignedData);
+            }
+            catch (CryptographicException e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
             }
         }
 
