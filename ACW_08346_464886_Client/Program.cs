@@ -48,6 +48,7 @@ namespace ACW_08346_464886_Client
                         string[] arrayToSort = splitList.ToArray(); // array containing only values to sort
                         string[] sortedArray = Service.Sort(arrayToSort);
                         Console.Write("Sorted values:\r\n");
+                        
                         for (int i = 0; i < sortedArray.Length; i++)
                         {
                             Console.Write("{0}", sortedArray[i]);
@@ -56,6 +57,12 @@ namespace ACW_08346_464886_Client
                                 Console.Write(" "); // separate each pair of values
                             }
                         }
+                        /*
+                        foreach (string str in sortedArray)
+                        {
+                            Console.Write("{0} ", str);
+                        }*/
+                        Console.Write("\r\n");
                         break;
                     case "PUBKEY":
                         hexPublicKey = Service.PublicKey();
