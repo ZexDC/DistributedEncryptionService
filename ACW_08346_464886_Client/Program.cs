@@ -13,6 +13,8 @@ namespace ACW_08346_464886_Client
         {
             // declare empty public key for later use in ENC
             string[] hexPublicKey = null;
+            // create reference to the service library
+            ServiceReference1.Service1Client Service = new ServiceReference1.Service1Client();
 
             string[] inputLines = null;
             int lines = Convert.ToInt32(Console.ReadLine()); // read number of lines that will follow
@@ -30,8 +32,7 @@ namespace ACW_08346_464886_Client
                     instruction = s;
                 else
                     instruction = s.Substring(0, firstSpaceIndex);
-                // create reference to the service library
-                ServiceReference1.Service1Client Service = new ServiceReference1.Service1Client();
+                
                 // execute action based on instruction
                 switch (instruction.ToUpper())
                 {
@@ -43,26 +44,27 @@ namespace ACW_08346_464886_Client
                         Console.Write(response + "\r\n");
                         break;
                     case "SORT":
+                        /* // use <number> value for array length
+                        int secondSpaceIndex = s.IndexOf(" ", firstSpaceIndex+1);
+                        int arrayLength = Convert.ToInt32(s.Remove(secondSpaceIndex).Substring(firstSpaceIndex + 1));
+                        string[] array = new string[arrayLength];
+                        string stringToSort = s.Substring(secondSpaceIndex + 1);
+                        array = stringToSort.Split(' ');
+                        array = Service.Sort(array);
+                        Console.Write("Sorted values:\r\n");
+                        foreach (string str in array)
+                        {
+                            Console.Write("{0}\r\n", str);
+                        }*/
+                        // use List
                         List<string> splitList = s.Split(' ').ToList();
                         splitList.RemoveRange(0, 2); // remove the instruction and the first value (array length)
                         string[] arrayToSort = splitList.ToArray(); // array containing only values to sort
                         string[] sortedArray = Service.Sort(arrayToSort);
                         Console.Write("Sorted values:\r\n");
-                        /*
-                        for (int i = 0; i < sortedArray.Length; i++)
-                        {
-                            Console.Write("{0}", sortedArray[i]);
-                            if ((i + 1) % 2 == 0 && (i + 1) < sortedArray.Length)
-                            {
-                                Console.Write(" "); // separate each pair of values
-                            }
-                        }*/
-                        
-                        foreach (string str in sortedArray)
-                        {
-                            Console.Write("{0} ", str);
-                        }
-                        Console.Write("\r\n");
+                        for (int i = 0; i < sortedArray.Length - 1; i++)
+                            Console.Write("{0} ", sortedArray[i]);
+                        Console.Write("{0}\r\n", sortedArray[sortedArray.Length - 1]); // print last value
                         break;
                     case "PUBKEY":
                         hexPublicKey = Service.PublicKey();

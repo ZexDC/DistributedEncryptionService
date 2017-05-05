@@ -35,19 +35,9 @@ namespace ACW_08346_464886_ServiceLibrary
             string[] sortedArray = array;
             Array.Sort(sortedArray);
             Console.Write("Sorted values:\r\n");
-            /*
-            for (int i = 0; i < sortedArray.Length; i++)
-            {
-                Console.Write("{0}", sortedArray[i]);
-                if ((i + 1) % 2 == 0 && (i + 1) < sortedArray.Length)
-                    Console.Write(" "); // separate each pair of values
-            }*/
-            
-            foreach (string s in sortedArray)
-            {
-                Console.Write("{0} ", s);
-            }
-            Console.Write("\r\n");
+            for(int i=0;i<sortedArray.Length-1;i++)
+                Console.Write("{0} ", sortedArray[i]);
+            Console.Write("{0}\r\n", sortedArray[sortedArray.Length-1]); // print last value
             return sortedArray;
         }
 
