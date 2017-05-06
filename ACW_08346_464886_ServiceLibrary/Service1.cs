@@ -9,7 +9,7 @@ using System.Text;
 namespace ACW_08346_464886_ServiceLibrary
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in both code and config file together.
-    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single, ConcurrencyMode = ConcurrencyMode.Multiple)]
     public class Service1 : IService1
     {
         private RSAParameters pubKey;

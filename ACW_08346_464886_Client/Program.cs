@@ -68,6 +68,7 @@ namespace ACW_08346_464886_Client
                         break;
                     case "PUBKEY":
                         hexPublicKey = Service.PublicKey();
+                        // print exponent and modulus parameters as hex strings
                         Console.WriteLine(hexPublicKey[0]);
                         Console.WriteLine(hexPublicKey[1]);
                         break;
