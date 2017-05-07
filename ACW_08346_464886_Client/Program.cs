@@ -73,30 +73,36 @@ namespace ACW_08346_464886_Client
                         Console.WriteLine(hexPublicKey[1]);
                         break;
                     case "ENC":
-                        if (hexPublicKey == null)
+                        try {
+                            if (hexPublicKey == null)
+                            {
+                                Console.Write("No public key.\r\n");
+                            }
+                            else
+                            {
+                                // get message from input line s
+                                string message = s.Substring(firstSpaceIndex + 1);
+                                // convert msg to byte array
+                                byte[] asciiByteMessage = System.Text.Encoding.ASCII.GetBytes(message);
+                                byte[] encryptedByteMessage;
+                                // recreate the public key as RSAParameters object
+                                RSAParameters publicKey = new RSAParameters()
+                                {
+                                    Exponent = StringToByteArray(hexPublicKey[0]),
+                                    Modulus = StringToByteArray(hexPublicKey[1])
+                                };
+                                // encrypt the message
+                                using (RSACryptoServiceProvider RSA = new RSACryptoServiceProvider())
+                                {
+                                    encryptedByteMessage = RSAEncrypt(asciiByteMessage, publicKey);
+                                }
+                                Service.Decrypt(encryptedByteMessage);
+                                Console.Write("Encrypted message sent.\r\n");
+                            }
+                        }
+                        catch (Exception e)
                         {
                             Console.Write("No public key.\r\n");
-                        }
-                        else
-                        {
-                            // get message from input line s
-                            string message = s.Substring(firstSpaceIndex + 1);
-                            // convert msg to byte array
-                            byte[] asciiByteMessage = System.Text.Encoding.ASCII.GetBytes(message);
-                            byte[] encryptedByteMessage;
-                            // recreate the public key as RSAParameters object
-                            RSAParameters publicKey = new RSAParameters()
-                            {
-                                Exponent = StringToByteArray(hexPublicKey[0]),
-                                Modulus = StringToByteArray(hexPublicKey[1])
-                            };
-                            // encrypt the message
-                            using (RSACryptoServiceProvider RSA = new RSACryptoServiceProvider())
-                            {
-                                encryptedByteMessage = RSAEncrypt(asciiByteMessage, publicKey);
-                            }
-                            Service.Decrypt(encryptedByteMessage);
-                            Console.Write("Encrypted message sent.\r\n");
                         }
                         break;
                     case "SHA1":
