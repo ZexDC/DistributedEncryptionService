@@ -44,7 +44,8 @@ namespace ACW_08346_464886_Client
                         Console.Write(response + "\r\n");
                         break;
                     case "SORT":
-                        /* // use <number> value for array length
+                        /*
+                        // use <number> value for array length
                         int secondSpaceIndex = s.IndexOf(" ", firstSpaceIndex+1);
                         int arrayLength = Convert.ToInt32(s.Remove(secondSpaceIndex).Substring(firstSpaceIndex + 1));
                         string[] array = new string[arrayLength];
@@ -55,10 +56,12 @@ namespace ACW_08346_464886_Client
                         foreach (string str in array)
                         {
                             Console.Write("{0}\r\n", str);
-                        }*/
-                        // use List
+                        }
+                        */
+
+                        // use List instead of <number> input
                         List<string> splitList = s.Split(' ').ToList();
-                        splitList.RemoveRange(0, 2); // remove the instruction and the first value (array length)
+                        splitList.RemoveRange(0, 2); // remove the instruction and the first value <number> (array length)
                         string[] arrayToSort = splitList.ToArray(); // array containing only values to sort
                         string[] sortedArray = Service.Sort(arrayToSort);
                         Console.Write("Sorted values:\r\n");
@@ -73,36 +76,33 @@ namespace ACW_08346_464886_Client
                         Console.WriteLine(hexPublicKey[1]);
                         break;
                     case "ENC":
-                        try {
-                            if (hexPublicKey == null)
+                        if (hexPublicKey == null)
+                        {
+                            Console.Write("No public key.\r\n");
+                        }
+                        else
+                        {
+                            // get message from input line s
+                            string message = s.Substring(firstSpaceIndex + 1);
+                            // convert msg to byte array
+                            byte[] asciiByteMessage = System.Text.Encoding.ASCII.GetBytes(message);
+                            byte[] encryptedByteMessage;
+                            // recreate the public key as RSAParameters object
+                            RSAParameters publicKey = new RSAParameters()
                             {
-                                Console.Write("No public key.\r\n");
+                                Exponent = StringToByteArray(hexPublicKey[0]),
+                                Modulus = StringToByteArray(hexPublicKey[1])
+                            };
+                            // encrypt the message
+                            using (RSACryptoServiceProvider RSA = new RSACryptoServiceProvider())
+                            {
+                                encryptedByteMessage = RSAEncrypt(asciiByteMessage, publicKey);
                             }
-                            else
+                            if (encryptedByteMessage != null)
                             {
-                                // get message from input line s
-                                string message = s.Substring(firstSpaceIndex + 1);
-                                // convert msg to byte array
-                                byte[] asciiByteMessage = System.Text.Encoding.ASCII.GetBytes(message);
-                                byte[] encryptedByteMessage;
-                                // recreate the public key as RSAParameters object
-                                RSAParameters publicKey = new RSAParameters()
-                                {
-                                    Exponent = StringToByteArray(hexPublicKey[0]),
-                                    Modulus = StringToByteArray(hexPublicKey[1])
-                                };
-                                // encrypt the message
-                                using (RSACryptoServiceProvider RSA = new RSACryptoServiceProvider())
-                                {
-                                    encryptedByteMessage = RSAEncrypt(asciiByteMessage, publicKey);
-                                }
                                 Service.Decrypt(encryptedByteMessage);
                                 Console.Write("Encrypted message sent.\r\n");
                             }
-                        }
-                        catch (Exception e)
-                        {
-                            Console.Write("No public key.\r\n");
                         }
                         break;
                     case "SHA1":

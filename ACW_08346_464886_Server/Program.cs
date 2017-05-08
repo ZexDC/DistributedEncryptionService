@@ -53,13 +53,6 @@ namespace ACW_08346_464886_Server
             // press enter to close server
             Console.ReadLine();
 #else
-            // http://stackoverflow.com/a/24601591
-            // alternative wait solution
-            //Task.Run(async () =>
-            //{
-            //    Thread.Sleep(9000);
-            //}).GetAwaiter().GetResult();
-
             // Wait on separate thread for less than 10 sec without blocking server
             Delay(9000).Wait();
 #endif

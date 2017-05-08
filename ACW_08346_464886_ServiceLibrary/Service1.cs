@@ -34,9 +34,9 @@ namespace ACW_08346_464886_ServiceLibrary
             string[] sortedArray = array;
             Array.Sort(sortedArray);
             Console.Write("Sorted values:\r\n");
-            for(int i=0;i<sortedArray.Length-1;i++)
+            for (int i = 0; i < sortedArray.Length - 1; i++)
                 Console.Write("{0} ", sortedArray[i]);
-            Console.Write("{0}\r\n", sortedArray[sortedArray.Length-1]); // print last value
+            Console.Write("{0}\r\n", sortedArray[sortedArray.Length - 1]); // print last value
             return sortedArray;
         }
 
