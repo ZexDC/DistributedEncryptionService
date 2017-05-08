@@ -55,8 +55,11 @@ namespace ACW_08346_464886_ServiceLibrary
             using (RSACryptoServiceProvider RSA = new RSACryptoServiceProvider())
             {
                 decryptedByteMessage = RSADecrypt(encryptedByteMessage, privKey);
-                Console.Write("Decrypted message is: {0}.\r\n",
-                    System.Text.Encoding.ASCII.GetString(decryptedByteMessage));
+                if (decryptedByteMessage != null)
+                {
+                    Console.Write("Decrypted message is: {0}.\r\n",
+                        System.Text.Encoding.ASCII.GetString(decryptedByteMessage));
+                }
             }
             return;
         }
